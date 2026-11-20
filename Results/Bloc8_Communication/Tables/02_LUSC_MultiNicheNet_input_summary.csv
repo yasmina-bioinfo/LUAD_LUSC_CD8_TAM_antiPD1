@@ -1,0 +1,7 @@
+histology,genes_in_input,genes_retained,cell_group,response_group,n_cells,n_patients
+LUSC,34931,11184,CD8.TEX,MPR,5950,25
+LUSC,34931,11184,CD8.TEX,non.MPR,15617,64
+LUSC,34931,11184,Macrophage_pure,MPR,4795,28
+LUSC,34931,11184,Macrophage_pure,non.MPR,6240,58
+LUSC,34931,11184,Monocyte_pure,MPR,10764,30
+LUSC,34931,11184,Monocyte_pure,non.MPR,11284,57

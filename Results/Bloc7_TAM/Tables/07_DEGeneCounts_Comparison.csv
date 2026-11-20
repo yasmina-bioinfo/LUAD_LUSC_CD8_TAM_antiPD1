@@ -1,0 +1,5 @@
+histology,group,n_patients,n_genes_tested,n_padj_05,n_padj_01,n_p_raw_05,median_abs_stat
+LUAD,Macrophage_pure,43,9483,14,1,1060,0.813
+LUAD,Monocyte_pure,47,7961,221,40,1483,1.009
+LUSC,Macrophage_pure,86,5744,209,35,1025,0.991
+LUSC,Monocyte_pure,87,7929,27,1,1077,0.895

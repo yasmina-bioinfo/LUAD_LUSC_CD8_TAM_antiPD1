@@ -1,0 +1,7 @@
+histology,genes_in_input,genes_retained,cell_group,response_group,n_cells,n_patients
+LUAD,34115,11836,CD8.TEX,MPR,2232,9
+LUAD,34115,11836,CD8.TEX,non.MPR,12633,38
+LUAD,34115,11836,Macrophage_pure,MPR,1035,9
+LUAD,34115,11836,Macrophage_pure,non.MPR,17965,34
+LUAD,34115,11836,Monocyte_pure,MPR,1213,9
+LUAD,34115,11836,Monocyte_pure,non.MPR,7336,38

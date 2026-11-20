@@ -1,0 +1,73 @@
+source,n_groups,groups,direction
+AHR,1,Macrophage_pure,nonMPR
+AIRE,1,Macrophage_pure,nonMPR
+AP1,2,Macrophage_pure + Monocyte_pure,nonMPR
+ATF2,2,Macrophage_pure + Monocyte_pure,nonMPR
+ATF4,1,Macrophage_pure,nonMPR
+ATF6,2,Macrophage_pure + Monocyte_pure,nonMPR
+CEBPA,1,Macrophage_pure,nonMPR
+CEBPB,1,Macrophage_pure,nonMPR
+CEBPD,1,Macrophage_pure,nonMPR
+CEBPG,2,Macrophage_pure + Monocyte_pure,nonMPR
+CREB1,2,Macrophage_pure + Monocyte_pure,nonMPR
+DDIT3,1,Macrophage_pure,nonMPR
+EGR1,2,Macrophage_pure + Monocyte_pure,nonMPR
+EPAS1,1,Macrophage_pure,nonMPR
+ETS1,1,Macrophage_pure,nonMPR
+FOS,2,Macrophage_pure + Monocyte_pure,nonMPR
+FOXQ1,1,Macrophage_pure,nonMPR
+GATA1,1,Macrophage_pure,nonMPR
+GATA3,1,Macrophage_pure,nonMPR
+GTF3A,1,Macrophage_pure,nonMPR
+HIF1A,2,Macrophage_pure + Monocyte_pure,nonMPR
+HMGA1,1,Macrophage_pure,nonMPR
+HNF1B,1,Macrophage_pure,nonMPR
+HNF4A,2,Macrophage_pure + Monocyte_pure,nonMPR
+HSF1,2,Macrophage_pure + Monocyte_pure,nonMPR
+HSF2,2,Macrophage_pure + Monocyte_pure,nonMPR
+HSF4,1,Macrophage_pure,nonMPR
+IRF1,2,Macrophage_pure + Monocyte_pure,nonMPR
+IRF2,1,Macrophage_pure,nonMPR
+IRF3,1,Macrophage_pure,nonMPR
+IRF7,1,Macrophage_pure,nonMPR
+IRF9,1,Macrophage_pure,nonMPR
+JUN,2,Macrophage_pure + Monocyte_pure,nonMPR
+JUND,1,Macrophage_pure,nonMPR
+MBD1,1,Macrophage_pure,nonMPR
+MYC,1,Monocyte_pure,nonMPR
+NCOA1,1,Macrophage_pure,nonMPR
+NCOA3,1,Macrophage_pure,nonMPR
+NFAT5,2,Macrophage_pure + Monocyte_pure,nonMPR
+NFATC2,1,Macrophage_pure,nonMPR
+NFKB,2,Macrophage_pure + Monocyte_pure,nonMPR
+NFKB1,2,Macrophage_pure + Monocyte_pure,nonMPR
+NFKB2,2,Macrophage_pure + Monocyte_pure,nonMPR
+NFKBIB,1,Macrophage_pure,nonMPR
+NFYB,2,Macrophage_pure + Monocyte_pure,nonMPR
+NFYC,1,Macrophage_pure,nonMPR
+NKX2-1,1,Macrophage_pure,nonMPR
+NR6A1,1,Macrophage_pure,MPR
+POU4F1,2,Macrophage_pure + Monocyte_pure,nonMPR
+PPARA,2,Macrophage_pure + Monocyte_pure,nonMPR
+PREB,1,Macrophage_pure,nonMPR
+REL,2,Macrophage_pure + Monocyte_pure,nonMPR
+RELA,2,Macrophage_pure + Monocyte_pure,nonMPR
+RELB,2,Macrophage_pure + Monocyte_pure,nonMPR
+RUNX2,2,Macrophage_pure + Monocyte_pure,nonMPR
+RXRA,2,Macrophage_pure + Monocyte_pure,nonMPR
+SMAD3,1,Monocyte_pure,nonMPR
+SMAD4,2,Macrophage_pure + Monocyte_pure,nonMPR
+SP1,2,Macrophage_pure + Monocyte_pure,nonMPR
+SP3,2,Macrophage_pure + Monocyte_pure,nonMPR
+SPI1,1,Macrophage_pure,nonMPR
+STAT1,2,Macrophage_pure + Monocyte_pure,nonMPR
+STAT2,1,Macrophage_pure,nonMPR
+STAT3,2,Macrophage_pure + Monocyte_pure,nonMPR
+STAT5A,2,Macrophage_pure + Monocyte_pure,nonMPR
+STAT5B,2,Macrophage_pure + Monocyte_pure,nonMPR
+STAT6,1,Macrophage_pure,nonMPR
+VDR,1,Macrophage_pure,nonMPR
+XBP1,2,Macrophage_pure + Monocyte_pure,nonMPR
+ZBTB4,2,Macrophage_pure + Monocyte_pure,MPR
+ZGPAT,1,Macrophage_pure,nonMPR
+ZNF354C,1,Macrophage_pure,nonMPR

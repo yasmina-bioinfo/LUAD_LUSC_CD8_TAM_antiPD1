@@ -1,0 +1,16 @@
+source,n_groups,groups,direction
+CIITA,1,Macrophage_pure,nonMPR
+HIF1A,1,Monocyte_pure,nonMPR
+HSF4,1,Macrophage_pure,nonMPR
+IRF1,2,Macrophage_pure + Monocyte_pure,nonMPR
+IRF9,1,Monocyte_pure,nonMPR
+NFIB,1,Monocyte_pure,MPR
+NFKB,1,Monocyte_pure,nonMPR
+NFKB1,2,Macrophage_pure + Monocyte_pure,nonMPR
+REL,2,Macrophage_pure + Monocyte_pure,nonMPR
+RELA,2,Macrophage_pure + Monocyte_pure,nonMPR
+STAT1,2,Macrophage_pure + Monocyte_pure,nonMPR
+STAT2,1,Monocyte_pure,nonMPR
+TP73,2,Macrophage_pure + Monocyte_pure,MPR
+TRERF1,1,Monocyte_pure,MPR
+ZBTB4,1,Monocyte_pure,MPR

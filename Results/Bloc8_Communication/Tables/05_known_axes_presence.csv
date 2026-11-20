@@ -1,0 +1,10 @@
+axis,LUAD_MPR,LUAD_non.MPR,LUSC_MPR,LUSC_non.MPR
+CXCL16-CXCR6,Present,Present,Present,Absent
+CD80/CD86-CD28,Absent,Present,Absent,Present
+CD80/CD86-CTLA4,Absent,Present,Absent,Present
+NECTIN2/PVR-TIGIT,Absent,Present,Absent,Present
+CD274-PDCD1,Absent,Present,Absent,Present
+SPP1-CD44,Absent,Present,Present,Present
+CXCL9/10/11-CXCR3,Absent,Present,Absent,Present
+CD200-CD200R1,Absent,Present,Absent,Present
+IFNG-IFNGR1/2,Absent,Present,Absent,Present

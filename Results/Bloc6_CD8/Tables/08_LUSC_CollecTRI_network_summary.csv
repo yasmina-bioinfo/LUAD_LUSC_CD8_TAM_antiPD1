@@ -1,0 +1,40 @@
+section,detail,n
+flags,is_stimulation=0;is_inhibition=1,7222
+flags,is_stimulation=1;is_inhibition=0,57104
+flags,is_stimulation=1;is_inhibition=1,169
+complex_mapping,COMPLEX:P01100_P05412 (FOS_JUN) -> AP1,596
+complex_mapping,COMPLEX:P01100_P17275 (FOS_JUNB) -> AP1,596
+complex_mapping,COMPLEX:P01100_P17535 (FOS_JUND) -> AP1,596
+complex_mapping,COMPLEX:P05412 (JUN) -> AP1,596
+complex_mapping,COMPLEX:P05412_P15407 (FOSL1_JUN) -> AP1,596
+complex_mapping,COMPLEX:P05412_P15408 (FOSL2_JUN) -> AP1,596
+complex_mapping,COMPLEX:P05412_P17275 (JUN_JUNB) -> AP1,596
+complex_mapping,COMPLEX:P05412_P17535 (JUN_JUND) -> AP1,596
+complex_mapping,COMPLEX:P05412_P53539 (FOSB_JUN) -> AP1,596
+complex_mapping,COMPLEX:P15407_P17275 (FOSL1_JUNB) -> AP1,596
+complex_mapping,COMPLEX:P15407_P17535 (FOSL1_JUND) -> AP1,596
+complex_mapping,COMPLEX:P15408_P17275 (FOSL2_JUNB) -> AP1,596
+complex_mapping,COMPLEX:P15408_P17535 (FOSL2_JUND) -> AP1,596
+complex_mapping,COMPLEX:P17275 (JUNB) -> AP1,596
+complex_mapping,COMPLEX:P17275_P17535 (JUNB_JUND) -> AP1,596
+complex_mapping,COMPLEX:P17275_P53539 (FOSB_JUNB) -> AP1,596
+complex_mapping,COMPLEX:P17535 (JUND) -> AP1,596
+complex_mapping,COMPLEX:P17535_P53539 (FOSB_JUND) -> AP1,596
+complex_mapping,COMPLEX:P19838 (NFKB1) -> NFKB,802
+complex_mapping,COMPLEX:P19838_Q00653 (NFKB1_NFKB2) -> NFKB,802
+complex_mapping,COMPLEX:P19838_Q01201 (NFKB1_RELB) -> NFKB,802
+complex_mapping,COMPLEX:P19838_Q04206 (NFKB1_RELA) -> NFKB,802
+complex_mapping,COMPLEX:P19838_Q04864 (NFKB1_REL) -> NFKB,802
+complex_mapping,COMPLEX:Q00653 (NFKB2) -> NFKB,802
+complex_mapping,COMPLEX:Q00653_Q01201 (NFKB2_RELB) -> NFKB,802
+complex_mapping,COMPLEX:Q00653_Q04206 (NFKB2_RELA) -> NFKB,802
+complex_mapping,COMPLEX:Q00653_Q04864 (NFKB2_REL) -> NFKB,802
+complex_mapping,COMPLEX:Q01201 (RELB) -> NFKB,802
+complex_mapping,COMPLEX:Q01201_Q04206 (RELA_RELB) -> NFKB,802
+complex_mapping,COMPLEX:Q01201_Q04864 (REL_RELB) -> NFKB,802
+complex_mapping,COMPLEX:Q04206 (RELA) -> NFKB,802
+complex_mapping,COMPLEX:Q04206_Q04864 (REL_RELA) -> NFKB,802
+complex_mapping,COMPLEX:Q04864 (REL) -> NFKB,802
+network,interactions in raw table,64495
+network,interactions after duplicate removal,42595
+network,regulators,1178

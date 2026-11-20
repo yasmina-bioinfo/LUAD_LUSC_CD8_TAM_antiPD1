@@ -1,0 +1,3 @@
+histology,n_patients,n_genes_kept,n_genes_tested,n_padj_05,n_padj_01,median_abs_stat,n_regulons_evaluable,median_regulon_size
+LUAD,47,7960,5028,65,2,0.842,479,15
+LUSC,89,7414,7414,258,59,0.942,461,15

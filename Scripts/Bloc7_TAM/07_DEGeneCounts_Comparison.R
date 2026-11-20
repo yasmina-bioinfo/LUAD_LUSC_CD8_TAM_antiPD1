@@ -1,0 +1,97 @@
+#!/usr/bin/env Rscript
+# ============================================================
+# 07_DEGeneCounts_Comparison.R
+# GSE243013 — Bloc7_TAM, Script 07 (LUAD and LUSC)
+#
+# Purpose: Compare the number of differentially expressed genes (MPR vs
+#          non-MPR) between LUAD and LUSC in each myeloid population
+#          (Macrophage_pure, Monocyte_pure), to test whether the smaller
+#          number of significant transcription factors in LUSC follows
+#          from a smaller differential signal upstream.
+#
+# Rationale: decoupleR infers activity from the per-gene DESeq2 statistic
+#          (Script 05). If fewer genes differ between response groups in
+#          LUSC, fewer factors will reach significance regardless of
+#          patient numbers.
+#
+# Method:  Same pseudobulk, filterByExpr and DESeq2 steps as Script 05
+#          (patients with at least 10 cells in the population, at least
+#          4 patients per response group).
+#
+# Both histologies are processed in one run (no histology suffix).
+#
+# Input:  Objects/03_LUAD_seu_TAM_classified.rds
+#         Objects/03_LUSC_seu_TAM_classified.rds
+# Output: Results/Bloc7_TAM/Tables/07_DEGeneCounts_Comparison.csv
+# ============================================================
+
+suppressPackageStartupMessages({
+  library(here); library(Seurat); library(dplyr); library(tibble)
+  library(DESeq2); library(edgeR)
+})
+
+MIN_CELLS    <- 10
+MIN_PATIENTS <- 4
+GROUPS       <- c("Macrophage_pure", "Monocyte_pure")
+
+count_de <- function(histology) {
+  
+  seu <- readRDS(here("Objects", paste0("03_", histology, "_seu_TAM_classified.rds")))
+  
+  seu$myeloid_group <- NA_character_
+  seu$myeloid_group[seu$scGate_TAM_class == "Macrophage_pure"] <- "Macrophage_pure"
+  seu$myeloid_group[seu$scGate_TAM_class == "Monocyte_pure"]   <- "Monocyte_pure"      
+  
+  out <- lapply(GROUPS, function(g) {
+    
+    cells <- colnames(seu)[!is.na(seu$myeloid_group) & seu$myeloid_group == g]
+    md <- seu@meta.data[cells, c("sampleID", "pathological_response")]
+    
+    keep <- md %>% rownames_to_column("cell") %>%
+      dplyr::count(sampleID, pathological_response) %>%
+      filter(n >= MIN_CELLS)
+    
+    if (min(table(keep$pathological_response)) < MIN_PATIENTS) return(NULL)
+    
+    cells <- cells[md$sampleID %in% keep$sampleID]
+    counts <- GetAssayData(seu, assay = "RNA", layer = "counts")[, cells]
+    
+    pb <- sapply(keep$sampleID, function(s) {
+      idx <- which(seu$sampleID[match(cells, colnames(seu))] == s)
+      Matrix::rowSums(counts[, idx, drop = FALSE])
+    })
+    colnames(pb) <- keep$sampleID
+    
+    coldata <- data.frame(row.names = keep$sampleID,
+                          condition = factor(keep$pathological_response,
+                                             levels = c("non-MPR", "MPR")))
+    condition <- factor(keep$pathological_response, levels = c("non-MPR", "MPR"))
+    dge <- edgeR::DGEList(counts = pb, group = condition)
+    pb <- pb[edgeR::filterByExpr(dge, group = condition), ]
+    n_genes_filterByExpr <- nrow(pb)  
+    
+    dds <- DESeqDataSetFromMatrix(round(pb), coldata, ~ condition)
+    dds <- DESeq(dds, quiet = TRUE)
+    res <- results(dds, contrast = c("condition", "MPR", "non-MPR"))
+    
+    tibble(histology = histology, group = g,
+           n_patients = ncol(pb),
+           n_genes_tested = n_genes_filterByExpr,
+           n_padj_05  = sum(res$padj < 0.05, na.rm = TRUE),
+           n_padj_01  = sum(res$padj < 0.01, na.rm = TRUE),
+           n_p_raw_05 = sum(res$pvalue < 0.05, na.rm = TRUE),
+           median_abs_stat = round(median(abs(res$stat), na.rm = TRUE), 3))
+  })
+  
+  rm(seu); gc()
+  bind_rows(out)
+}
+
+res_all <- bind_rows(count_de("LUAD"), count_de("LUSC"))
+
+cat("\n=== differentially expressed genes per group and histology ===\n")
+print(res_all, width = Inf)
+
+dir.create(here("Results", "Bloc7_TAM", "Tables"), recursive = TRUE, showWarnings = FALSE)
+readr::write_csv(res_all, here("Results", "Bloc7_TAM", "Tables", "07_DEGeneCounts_Comparison.csv"))
+cat("\nScript 07 (DE gene counts comparison) complete.\n")

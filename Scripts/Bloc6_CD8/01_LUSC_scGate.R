@@ -1,0 +1,145 @@
+#!/usr/bin/env Rscript
+# ============================================================
+# 01_LUSC_scGate.R
+# GSE243013 — Bloc6_CD8, Script 01 (LUSC)
+#
+# Purpose: purify CD8 T cells from the full TME object with scGate
+# (marker-based, hierarchical gating; Andreatta et al., 2022), independently
+# of the CellTypist annotation. lineage_CD8 is used only for a cross-check
+# after the classification.
+#
+# Model: scGate_models_DB$human$TME_HiRes, retrieved with get_scGateDB()
+# (model version: see README).
+#
+# Batching: scGate is run on batches of whole patients (about 25,000 cells
+# per batch, balanced for MPR / non-MPR, fixed seed), to avoid the
+# dense-matrix coercion of the full object.
+#
+# Input:  Objects/06_LUSC_seu_final.rds
+# Output: Objects/01_LUSC_seu_scGate.rds
+#         Objects/01_LUSC_scGate_TME_HiRes_model.rds
+#         Results/Bloc6_CD8/Tables/01_LUSC_scGate_run_info.txt
+#         Results/Bloc6_CD8/Tables/01_LUSC_scGate_vs_lineageCD8_crosscheck.csv
+# ============================================================
+
+suppressPackageStartupMessages({
+  library(here)
+  library(Seurat)
+  library(scGate)
+  library(dplyr)
+  library(readr)
+})
+
+IN_OBJ    <- here("Objects", "06_LUSC_seu_final.rds")
+OUT_OBJ   <- here("Objects", "01_LUSC_seu_scGate.rds")
+OUT_TAB   <- here("Results", "Bloc6_CD8", "Tables")
+dir.create(OUT_TAB, recursive = TRUE, showWarnings = FALSE)
+
+CELLS_PER_BATCH <- 25000
+SEED <- 123
+
+message("Loading LUSC final object... ", Sys.time())
+seu <- readRDS(IN_OBJ)
+message("Cells loaded: ", ncol(seu))
+
+stopifnot(all(c("annotation_final", "lineage_CD8") %in% colnames(seu@meta.data)))
+stopifnot("harmony" %in% names(seu@reductions))
+
+# ---- Cohort guard: 7 chemo-only patients must be absent ----
+# Expected: LUSC 100 patients (32 MPR + 68 non-MPR)
+print(
+  seu@meta.data %>%
+    distinct(sampleID, pathological_response) %>%
+    count(pathological_response)
+)
+print(table(seu$pathological_response))
+stopifnot(n_distinct(seu$sampleID) == 100)
+
+message("Loading scGate TME_HiRes model database...")
+models.TME <- get_scGateDB()
+
+# ---- Traceability: exact model and run information ----
+saveRDS(models.TME$human$TME_HiRes,
+        here("Objects", "01_LUSC_scGate_TME_HiRes_model.rds"))
+writeLines(c(
+  "Script : 01_LUSC_scGate.R (batched)",
+  paste("Execution date :", Sys.time()),
+  paste("scGate :", as.character(packageVersion("scGate"))),
+  paste("UCell :", as.character(packageVersion("UCell"))),
+  paste("Seurat :", as.character(packageVersion("Seurat"))),
+  paste("Cells per batch :", CELLS_PER_BATCH, "| seed :", SEED),
+  "Model : TME_HiRes, downloaded via get_scGateDB()"
+), file.path(OUT_TAB, "01_LUSC_scGate_run_info.txt"))
+
+# ---- Batch design: whole patients, balanced for response group ----
+set.seed(SEED)
+n_batches <- ceiling(ncol(seu) / CELLS_PER_BATCH)
+
+pat <- seu@meta.data %>%
+  count(sampleID, pathological_response, name = "n_cells") %>%
+  mutate(pathological_response = as.character(pathological_response)) %>%
+  group_by(pathological_response) %>%
+  slice_sample(prop = 1) %>%
+  ungroup()
+
+load_mat <- matrix(0, n_batches, 2,
+                   dimnames = list(NULL, c("MPR", "non-MPR")))
+pat$batch <- NA_integer_
+for (i in seq_len(nrow(pat))) {
+  g <- pat$pathological_response[i]
+  b <- which.min(load_mat[, g] + rowSums(load_mat) * 1e-6)
+  pat$batch[i] <- b
+  load_mat[b, g] <- load_mat[b, g] + pat$n_cells[i]
+}
+seu$scGate_batch <- pat$batch[match(seu$sampleID, pat$sampleID)]
+stopifnot(!anyNA(seu$scGate_batch))
+message("Cells per batch and response group:")
+print(table(batch = seu$scGate_batch, seu$pathological_response))
+
+# ---- Lighten object: RNA assay only, KEEP harmony ----
+seu_light <- DietSeurat(seu, assays = "RNA", dimreducs = "harmony")
+
+# ---- Run scGate batch by batch ----
+res <- vector("list", n_batches)
+for (b in seq_len(n_batches)) {
+  message("Batch ", b, "/", n_batches, " — ", Sys.time())
+  sub <- subset(seu_light, cells = colnames(seu)[seu$scGate_batch == b])
+  sub <- scGate(
+    sub,
+    model     = models.TME$human$TME_HiRes,
+    reduction = "harmony",
+    ncores    = 1
+  )
+  res[[b]] <- setNames(as.character(sub$scGate_multi), colnames(sub))
+  rm(sub); gc()
+}
+rm(seu_light); gc()
+
+lab <- unlist(res, use.names = TRUE)
+stopifnot(length(lab) == ncol(seu), !anyDuplicated(names(lab)))
+seu$scGate_multi <- unname(lab[colnames(seu)])
+
+message("scGate_multi distribution:")
+print(table(seu$scGate_multi, useNA = "ifany"))
+
+# ---- Cross-check with CellTypist lineage (NA-safe) ----
+scGate_CD8T <- seu$scGate_multi %in% "CD8T"
+crosscheck <- table(
+  scGate_CD8T = scGate_CD8T,
+  lineage_CD8 = seu$lineage_CD8,
+  useNA = "ifany"
+)
+print(crosscheck)
+stopifnot(sum(crosscheck) == ncol(seu))
+
+write_csv(
+  as.data.frame.matrix(crosscheck) %>% tibble::rownames_to_column("scGate_CD8T"),
+  file.path(OUT_TAB, "01_LUSC_scGate_vs_lineageCD8_crosscheck.csv")
+)
+
+message("scGate CD8T: ", sum(scGate_CD8T))
+message("lineage_CD8 (CellTypist): ", sum(seu$lineage_CD8, na.rm = TRUE))
+message("Intersection: ", sum(scGate_CD8T & seu$lineage_CD8 %in% TRUE))
+
+saveRDS(seu, OUT_OBJ)
+message("Script 01 (scGate, LUSC, batched) complete. ", Sys.time())

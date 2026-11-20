@@ -1,0 +1,28 @@
+cluster,label,n_cells,gene,source,role,in_object,pct_expressing
+9,Plasma cells,11045,CD38,Dominguez Conde et al. (CellTypist paper),marker,TRUE,61.67
+9,Plasma cells,11045,XBP1,Dominguez Conde et al. (CellTypist paper),marker,TRUE,96.79
+9,Plasma cells,11045,SDC1,Dominguez Conde et al. (CellTypist paper),marker,TRUE,61.3
+9,Plasma cells,11045,MKI67,Dominguez Conde et al. (CellTypist paper),control (expected low in plasma cells),TRUE,0.94
+11,Mast cells,9338,AL157895.1,"CellTypist model, top 10",marker,TRUE,52.22
+11,Mast cells,9338,TPSAB1,"CellTypist model, top 10",marker,TRUE,99.35
+11,Mast cells,9338,CPA3,"CellTypist model, top 10",marker,TRUE,98.17
+11,Mast cells,9338,IL1RL1,"CellTypist model, top 10",marker,TRUE,90.54
+11,Mast cells,9338,SIGLEC6,"CellTypist model, top 10",marker,TRUE,63.4
+11,Mast cells,9338,IL1RAPL1,"CellTypist model, top 10",marker,TRUE,9.36
+11,Mast cells,9338,CLC,"CellTypist model, top 10",marker,TRUE,0.06
+11,Mast cells,9338,CCN3,"CellTypist model, top 10",marker,FALSE,
+11,Mast cells,9338,MIR600HG,"CellTypist model, top 10",marker,FALSE,
+11,Mast cells,9338,TMEM233,"CellTypist model, top 10",marker,TRUE,32.37
+14,pDC,1146,SCT,"CellTypist model, top 10",marker,TRUE,76.35
+14,pDC,1146,AC007381.1,"CellTypist model, top 10",marker,TRUE,2.27
+14,pDC,1146,LRRC26,"CellTypist model, top 10",marker,TRUE,77.49
+14,pDC,1146,C3orf86,"CellTypist model, top 10",marker,FALSE,
+14,pDC,1146,LCNL1,"CellTypist model, top 10",marker,TRUE,9.95
+14,pDC,1146,AC006115.2,"CellTypist model, top 10",marker,FALSE,
+14,pDC,1146,AC022126.1,"CellTypist model, top 10",marker,TRUE,0
+14,pDC,1146,TRBV10-2,"CellTypist model, top 10",marker,TRUE,0.09
+14,pDC,1146,MIR600HG,"CellTypist model, top 10",marker,FALSE,
+14,pDC,1146,CD207,"CellTypist model, top 10",marker,TRUE,0.09
+19,Tem/Trm cytotoxic T cells,161,GZMK,"Mullan et al. 2023, Table 3",marker,TRUE,68.94
+19,Tem/Trm cytotoxic T cells,161,CD8A,"Mullan et al. 2023, Table 3",marker,TRUE,87.58
+19,Tem/Trm cytotoxic T cells,161,CCL5,"Mullan et al. 2023, Table 3",marker,TRUE,100
