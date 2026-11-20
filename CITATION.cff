@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite it as below."
+title: "Code for: Transcription factor activity and inferred myeloid-CD8 signaling by pathological response in lung adenocarcinoma and squamous cell carcinoma after neoadjuvant PD-1 therapy"
+type: software
+authors:
+  - family-names: "Soumahoro"
+    given-names: "Myriam Yasmina"
+    orcid: "https://orcid.org/0009-0009-8549-5340"
+version: "1.0.0"
+date-released: "2026-11-20"
+license: MIT
+repository-code: "https://github.com/yasmina-bioinfo/LUAD_LUSC_CD8_TAM_antiPD1"
