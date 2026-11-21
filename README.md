@@ -1,6 +1,6 @@
 # LUAD vs LUSC: CD8 and TAM Biology in Neoadjuvant Anti-PD-1 Treated NSCLC
 
-Preprint: [DOI to be added once online]
+Preprint: https://doi.org/10.5281/zenodo.24423380
 
 This repository contains the code used for the preprint. The full development history, including approaches that were abandoned along the way, is kept in the archive repository [TAM_CD8_LUAD_LUSC_scRNAseq](https://github.com/yasmina-bioinfo/TAM_CD8_LUAD_LUSC_scRNAseq).
 
@@ -673,7 +673,7 @@ Nine axes described in the literature were found in the output; they are listed 
 
 | Axis | Direction | Reported effect | Source | Cancer and model | LUAD MPR | LUAD non-MPR | LUSC MPR | LUSC non-MPR |
 |---|---|---|---|---|---|---|---|---|
-| CXCL16–CXCR6 | Myeloid cells to CD8.TEX | Context-dependent: CXCL16 on myeloid cells recruits and retains CXCR6⁺ CD8 T cells, while contact with CXCL16⁺ myeloid cells inside the tumor has also been linked to T cell dysfunction | Li et al. 2026; Chia et al. 2024 | Review, tumors and inflammatory diseases; human and mouse glioblastoma | Present | Present | Present | Absent |
+| CXCL16–CXCR6 | Myeloid cells to CD8.TEX | Context-dependent: CXCL16 on myeloid cells recruits and retains CXCR6⁺ CD8 T cells; the axis also supports early T-cell responses and infiltration of the tumor and is later associated with immunosuppression within the tumor microenvironment | Li et al. 2026; Chia et al. 2024 | Review, tumors and inflammatory diseases; human and mouse glioblastoma | Present | Present | Present | Absent |
 | IFNG–IFNGR1/2 | CD8.TEX to myeloid cells | Context-dependent: IFNγ, of which CD8 T cells are key producers, acts on IFNGR1, expressed by all nucleated cells; initial exposure is described as antitumorigenic, including recruitment of T cells through CXCL9/10/11 and priming of macrophages towards an antitumorigenic phenotype, whereas prolonged exposure promotes protumorigenic effects, including immunosuppression through PD-L1 and IDO1 | Gocher et al. 2022 | Review, several tumor types | Absent | Present | Absent | Present |
 | CD80/CD86–CD28 | Myeloid cells to CD8.TEX | Anti-tumor: co-stimulation that CD8 T cells need to be fully activated; without it, they become anergic | Sato et al. 2022; Raskov et al. 2021 | Human NSCLC; review | Absent | Present | Absent | Present |
 | CD80/CD86–CTLA4 | Myeloid cells to CD8.TEX | Immunosuppressive: CTLA-4 competes with CD28, dampens TCR signalling and promotes exhaustion; the authors propose that CTLA-4⁺ T cells interact with CD80 on macrophages | Sato et al. 2022; Zhong et al. 2025 | Human NSCLC; review | Absent | Present | Absent | Present |
